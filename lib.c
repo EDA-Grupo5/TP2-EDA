@@ -1,8 +1,6 @@
 #include "lib.h"
 
-struct elemento{
-    struct aluno dados;
-    struct elemento *prox;
-};
-
-typedef struct elemento Elem;
+int soma(int a, int b)
+{
+    return a+b;
+}

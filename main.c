@@ -1,13 +1,11 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "lib.h"
+#include <stdio.h> 
+#include <stdlib.h> 
+#include "lib.h" 
 
-int main()
-{
+int main() 
+{ 
+    printf("%d\n", soma(1,2)); 
 
-    Lista *li; //ponteiro para ponteiro
-    printf("Hellow World");
-    
     return 0;
 }
 
