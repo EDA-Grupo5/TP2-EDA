@@ -21,5 +21,9 @@ void treeFree(node * root);
 
 // find the node with the given key
 node * treeFind(node * root, int key);
+
+// testing the functions
+void test();
+
 #endif
 
