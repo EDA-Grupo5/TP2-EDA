@@ -19,5 +19,7 @@ void treePrint(node * root);
 // free the memory of the node
 void treeFree(node * root);
 
+// find the node with the given key
+node * treeFind(node * root, int key);
 #endif
 

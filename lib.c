@@ -29,6 +29,21 @@ node * treeInsert(node * root, int key){
     return root;
 }
 
+node * treeFind(node * root, int key){
+    if(root == NULL){
+        return NULL;
+    }
+    else if(key < root->key){
+        return treeFind(root->left, key);
+    }
+    else if(key > root->key){
+        return treeFind(root->right, key);
+    }
+    else{
+        return root;
+    }
+}
+
 void treePrint(node * root)
 {
     if (root != NULL){
