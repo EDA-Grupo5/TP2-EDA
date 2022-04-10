@@ -61,8 +61,9 @@ void treeFree(node * root){
     }
 }
 
-void test(void){
-     node * root = nodeCreate(40);
+void test_example_1(void){
+    node *root;
+    root = nodeCreate(40);
     root = treeInsert(root, 54);
     root = treeInsert(root, 1082);
     root = treeInsert(root, 678);
@@ -77,13 +78,13 @@ void test(void){
     root = treeInsert(root, 897);
     root = treeInsert(root, 182);
     root = treeInsert(root, 9876);
-    printf("\nFULL TREE:\n");
+    printf("\n>>>FULL TREE:\n");
     treePrint(root);
-    printf("\nSUB TREE WHEN THE KEY ARE 8674\n");
-    root = treeFind(root, 8674);
-    treePrint(root);
-    printf("\nSUB TREE WHEN THE KEY ARE 678\n");
-    root = treeFind(root, 678);
+    printf("\n>>>SUB TREE WHEN THE KEY ARE 8674\n");
+    treePrint(treeFind(root, 8674));
+    printf("\n>>>SUB TREE WHEN THE KEY ARE 678\n");
+    treePrint(treeFind(root, 678));
+    printf("\n>>>TEST FINISHED\n");
     treeFree(root);
 }
 

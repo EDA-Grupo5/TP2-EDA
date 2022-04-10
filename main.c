@@ -4,6 +4,7 @@
 
 int main (void)
 {
-    test();
+    test_example_1();
+    system("pause");
     return 0;
 }
