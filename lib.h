@@ -7,6 +7,28 @@ typedef struct BinarySearchTree{
     struct BinarySearchTree *right;
 }node;
 
+// **************** FUNCTIONS - TEST MENU **************** //
+
+// the function returns the number of the test that the user wants to run
+void test_menu(void);
+
+// **************** FUNCTIONS - MANIPULATION OF FILE **************** //
+
+// create a new file with the name given as parameter
+void createFile(char *fileName);
+
+// Verifies if the file exists
+int fileExists(char *fileName);
+
+// Verifies if the file is empty
+int fileIsEmpty(char *fileName);
+
+// read the file and add the content to the tree
+node * readFile(char *fileName, node * root);
+
+// function that test the functions about the file
+void test_example_3();
+
 // **************** FUNCTIONS - BINARY SEARCH TREE **************** //
 
 // create a new node to be inserted into the tree

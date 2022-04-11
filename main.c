@@ -4,9 +4,7 @@
  
 int main (void)
 {
-    //test_example_1();
-    printf("\n new test \n");
-    test_example_2();
+    test_menu();
     system("pause");
     return 0;
 }

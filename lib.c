@@ -2,6 +2,138 @@
 #include <stdio.h> 
 #include <stdlib.h> 
 
+// functions about menu
+void test_menu(void){
+    int again = 1;
+    int option = 0;
+    printf("SELECT THE TEST YOU WANT TO RUN:\n");
+    printf("1. Test example 1 - FUNCTIONS ABOUT BINARY SEARCH TREE \n");
+    printf("2. Test example 2 - FUNCTIONS ABOUT AVL TREE\n");
+    printf("3. Test example 3 - FUNCTIONS ABOUT FILE\n");
+    printf("4. Exit - EXIT THE PROGRAM\n");
+    scanf("%d", &option);
+    if(option == 1){
+        printf("\n>>>TEST EXAMPLE 1 IS RUNNING\n");
+        test_example_1();
+        printf("\n>>>TEST EXAMPLE 1 IS FINISHED\n");
+        printf("\n>>>DO YOU WANT TO RUN ANOTHER TEST?\n");
+        printf("1. YES\n");
+        printf("2. NO\n");
+        scanf("%d", &again);
+        if(again == 1){
+            test_menu();
+        }
+        else{
+            printf("\n>>>THANK YOU FOR USING THE PROGRAM\n");
+            exit(0);
+        }
+    }
+    else if(option == 2){
+        printf("\n>>>TEST EXAMPLE 2 IS RUNNING\n");
+        test_example_2();
+        printf("\n>>>TEST EXAMPLE 2 IS FINISHED\n");
+        printf("\n>>>DO YOU WANT TO RUN ANOTHER TEST?\n");
+        printf("1. YES\n");
+        printf("2. NO\n");
+        scanf("%d", &again);
+        if(again == 1){
+            test_menu();
+        }
+        else{
+            printf("\n>>>THANK YOU FOR USING THE PROGRAM\n");
+            exit(0);
+        }        
+    }
+    else if(option == 3){
+        printf("\n>>>TEST EXAMPLE 3 IS RUNNING\n");
+        test_example_3();
+        printf("\n>>>TEST EXAMPLE 3 IS FINISHED\n");
+        printf("\n>>>DO YOU WANT TO RUN ANOTHER TEST?\n");
+        printf("1. YES\n");
+        printf("2. NO\n");
+        scanf("%d", &again);
+        if(again == 1){
+            test_menu();
+        }
+        else{
+            printf("\n>>>THANK YOU FOR USING THE PROGRAM\n");
+            exit(0);
+        }
+    }
+    else if(option == 4){
+        printf("\n>>>EXITING THE PROGRAM\n");
+        exit(0);
+    }
+    else{
+        printf("\n>>>WRONG INPUT\n");
+        test_menu();
+    }
+}
+
+// functions about file manipulation
+int fileExists(char *fileName){
+    FILE *file;
+    file = fopen(fileName, "r");
+    if(file == NULL){
+        printf("The file %s does not exist.\n", fileName);
+        return 0;
+    }
+    fclose(file);
+    printf("The file %s exists.\n", fileName);
+    return 1;
+}
+
+int fileIsEmpty(char *fileName){
+    FILE *file;
+    file = fopen(fileName, "r");
+    if(file == NULL){
+        printf("The file %s does not exist.\n", fileName);
+        return 0;
+    }
+    if(fgetc(file) == EOF){
+        printf("The file %s is empty.\n", fileName);
+        return 1;
+    }
+    fclose(file);
+    printf("The file %s is not empty.\n", fileName);
+    return 0;
+}
+
+node * readFile(char *fileName, node * root){
+    FILE *file;
+    int key;
+    file = fopen(fileName, "r");
+    if(file == NULL){
+        printf("The file %s does not exist.\n", fileName);
+        return root;
+    }
+    while(fscanf(file, "%d", &key) != EOF){
+        root = treeInsert(root, key);
+    }
+    fclose(file);
+    printf("The file %s was read.\n", fileName);
+    return root;
+}
+
+void createFile(char *fileName){
+    FILE *file;
+    file = fopen(fileName, "w");
+    if(file == NULL){
+        printf("The file %s could not be created.\n", fileName);
+        return;
+    }
+    fclose(file);
+    printf("The file %s was created.\n", fileName);
+}
+
+void test_example_3(){
+    node * root = NULL;
+    createFile("test.txt");
+    root = readFile("test.txt", root);
+    treePrint(root);
+    treeFree(root);
+}
+
 // functions about binary search tree
 node * nodeCreate(int key)
 {
@@ -181,4 +313,3 @@ void test_example_2(void){
 
     treeFree(root);
 }
-
