@@ -5,7 +5,7 @@
 int main() 
 { 
     printf("%d\n", soma(1,2)); 
-
+    printf("olá");
     return 0;
 }
 
