@@ -26,6 +26,9 @@ int fileIsEmpty(char *fileName);
 // read the file and add the content to the tree
 node * readFile(char *fileName, node * root);
 
+// read the csv file and add the content to the binary search tree
+node * readCSV(char *fileName, node * root);
+
 // function that test the functions about the file
 void test_example_3();
 
@@ -43,6 +46,9 @@ void treeFree(node * root);
 node * treeFind(node * root, int key);
 //  function that balances a binary search tree
 node * balanceTree(node * root);
+// function that calculate the height of the tree
+int treeHeight(node * root);
+
 // testing the functions with the first teacher pdf example
 void test_example_1();
 
