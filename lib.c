@@ -245,7 +245,7 @@ void treeFree(node * root){
 }
 
 void test_example_1(void){
-    node *root;
+    node *root =(node *) malloc(sizeof(node));
     root = nodeCreate(40);
     root = treeInsert(root, 54);
     root = treeInsert(root, 1082);
@@ -305,11 +305,11 @@ void treeCalculateFatBal(node * root){
         root->fatbal = left_height - right_height;
         treeCalculateFatBal(root->left);
         treeCalculateFatBal(root->right);
-    }
+    } 
 } 
 
 void test_example_2(void){
-    node *root;
+    node *root = (node *) malloc(sizeof(node));
     root = nodeCreate(40);
     root = treeInsert(root, 54);
     root = treeInsert(root, 1082);
@@ -327,7 +327,7 @@ void test_example_2(void){
     root = treeInsert(root, 9876);
     printf("\n>>>FULL TREE:\n");
     treePrint(root);    
-
+    
     printf("\n>>> BEFORE BALANCE\n");
     printExample1(root);
 
