@@ -1,6 +1,7 @@
 #include "lib.h" 
 #include <stdio.h> 
 #include <stdlib.h> 
+#include <string.h>
 
 // functions about menu
 void test_menu(void){
@@ -115,6 +116,34 @@ node * readFile(char *fileName, node * root){
     return root;
 }
 
+node *readCSV(char * filename, node * root){
+    FILE *file;
+    file = fopen(filename, "r");
+    if(file == NULL){
+        printf("The file %s does not exist.\n", filename);
+        return root;
+    }
+    char line[100];
+    char *token;
+    int i = 0;
+    while(fgets(line, 100, file) != NULL){
+        token = strtok(line, ",");
+        while(token != NULL){
+            if(i == 0){
+                root = treeInsert(root, atoi(token));
+            }
+            else{
+                root = treeInsert(root, atoi(token));
+            }
+            token = strtok(NULL, ",");
+            i++;
+        }
+        i = 0;
+    }
+    fclose(file);
+    return root;
+}
+
 void createFile(char *fileName){
     FILE *file;
     file = fopen(fileName, "w");
@@ -128,10 +157,22 @@ void createFile(char *fileName){
 
 void test_example_3(){
     node * root = NULL;
-    createFile("test.txt");
-    root = readFile("test.txt", root);
-    treePrint(root);
-    treeFree(root);
+    //createFile("test.txt");
+    root = readCSV("test.txt", root);
+    if (root == NULL)
+    {
+        printf(">>Oops! The root has not been modified.\n");
+        printf(">>Please, review the function 'readFile' to fix this bug.\n");
+    }
+    else{
+        printf(">>The root has been modified.\n");
+        printf(">>Full tree:\n");
+        treePrint(root);
+        printf(">>\n>>>Now the balance factor is being calculated\n");
+        treeCalculateFatBal(root);
+        printExample1(root);
+        treeFree(root);
+    }
 }
 
 // functions about binary search tree
@@ -196,21 +237,12 @@ void treeFree(node * root){
 
 void test_example_1(void){
     node *root;
+    int nm[] = {40,54,1082,678,8674,8789,990,7642,9762,2345,34,897,182,9876};
+    int i;
     root = nodeCreate(40);
-    root = treeInsert(root, 54);
-    root = treeInsert(root, 1082);
-    root = treeInsert(root, 678);
-    root = treeInsert(root, 8674);
-    root = treeInsert(root, 87);
-    root = treeInsert(root, 89);
-    root = treeInsert(root, 990);
-    root = treeInsert(root, 7642);
-    root = treeInsert(root, 9762);
-    root = treeInsert(root, 2345);
-    root = treeInsert(root, 34);
-    root = treeInsert(root, 897);
-    root = treeInsert(root, 182);
-    root = treeInsert(root, 9876);
+    for(i = 1; i< 14; i++){
+        root = treeInsert(root, nm[i]);
+    }
     printf("\n>>>FULL TREE:\n");
     treePrint(root);
     printf("\n>>>SUB TREE WHEN THE KEY ARE 8674\n");
@@ -255,61 +287,36 @@ void treeCalculateFatBal(node * root){
 
 void test_example_2(void){
     node *root;
-    root = nodeCreate(40);
-    root = treeInsert(root, 54);
-    root = treeInsert(root, 1082);
-    root = treeInsert(root, 678);
-    root = treeInsert(root, 8674);
-    root = treeInsert(root, 87);
-    root = treeInsert(root, 89);
-    root = treeInsert(root, 990);
-    root = treeInsert(root, 7642);
-    root = treeInsert(root, 9762);
-    root = treeInsert(root, 2345);
-    root = treeInsert(root, 34);
-    root = treeInsert(root, 897);
-    root = treeInsert(root, 182);
-    root = treeInsert(root, 9876);
+    int nm[] = {40,54,1082,678,8674,8789,990,7642,9762,2345,34,897,182,9876};
+    int i;
+    root = nodeCreate(nm[0]);
+    for(i = 1; i< 14; i++){
+        root = treeInsert(root, nm[i]);
+    }
     printf("\n>>>FULL TREE:\n");
     treePrint(root);    
 
     printf("\n>>> BEFORE BALANCE\n");
-    printf("fatbal node 40: %d\n", treeFind(root, 40)->fatbal);
-    printf("fatbal node 54: %d\n", treeFind(root, 54)->fatbal);
-    printf("fatbal node 1082: %d\n", treeFind(root, 1082)->fatbal );
-    printf("fatbal node 678: %d\n", treeFind(root, 678)->fatbal);
-    printf("fatbal node 8674: %d\n", treeFind(root, 8674)->fatbal);
-    printf("fatbal node 87: %d\n", treeFind(root, 87)->fatbal);
-    printf("fatbal node 89: %d\n", treeFind(root, 89)->fatbal);
-    printf("fatbal node 990: %d\n", treeFind(root, 990)->fatbal);
-    printf("fatbal node 7642: %d\n", treeFind(root, 7642)->fatbal);
-    printf("fatbal node 9762: %d\n", treeFind(root, 9762)->fatbal);
-    printf("fatbal node 2345: %d\n", treeFind(root, 2345)->fatbal);
-    printf("fatbal node 34: %d\n", treeFind(root, 34)->fatbal);
-    printf("fatbal node 897: %d\n", treeFind(root, 897)->fatbal);
-    printf("fatbal node 182: %d\n", treeFind(root, 182)->fatbal);
-    printf("fatbal node 9876: %d\n", treeFind(root, 9876)->fatbal);
+    printExample1(root);
 
     printf("\n>>> AFTER BALANCE\n");
     treePrint(root);
     treeCalculateFatBal(root);
-    printf("\nfatbal node 40: %d\n", treeFind(root, 40)->fatbal);
-    printf("fatbal node 54: %d\n", treeFind(root, 54)->fatbal);
-    printf("fatbal node 1082: %d\n", treeFind(root, 1082)->fatbal );
-    printf("fatbal node 678: %d\n", treeFind(root, 678)->fatbal);
-    printf("fatbal node 8674: %d\n", treeFind(root, 8674)->fatbal);
-    printf("fatbal node 87: %d\n", treeFind(root, 87)->fatbal);
-    printf("fatbal node 89: %d\n", treeFind(root, 89)->fatbal);
-    printf("fatbal node 990: %d\n", treeFind(root, 990)->fatbal);
-    printf("fatbal node 7642: %d\n", treeFind(root, 7642)->fatbal);
-    printf("fatbal node 9762: %d\n", treeFind(root, 9762)->fatbal);
-    printf("fatbal node 2345: %d\n", treeFind(root, 2345)->fatbal);
-    printf("fatbal node 34: %d\n", treeFind(root, 34)->fatbal);
-    printf("fatbal node 897: %d\n", treeFind(root, 897)->fatbal);
-    printf("fatbal node 182: %d\n", treeFind(root, 182)->fatbal);
-    printf("fatbal node 9876: %d\n", treeFind(root, 9876)->fatbal);
+    printExample1(root);
 
     printf("\n>>>TEST FINISHED\n");
 
     treeFree(root);
+}
+
+//auxiliary functions
+
+void printExample1(node * root){
+    int nm[] = {40,54,1082,678,8674,8789,990,7642,9762,2345,34,897,182,9876};
+    int i;
+
+    for(i = 0; i< 14; i++){
+        printf("fatbal node %d: %d\n",nm[i], treeFind(root, nm[i])->fatbal);
+    }
+    
 }
