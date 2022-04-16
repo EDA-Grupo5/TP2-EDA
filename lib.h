@@ -40,6 +40,8 @@ node * nodeCreate(int key);
 node * treeInsert(node * root, int key);
 // print the tree in order
 void treePrint(node * root);
+// print the fatbal of each node
+void treePrintFatbal(node * root);
 // free the memory of the node
 void treeFree(node * root);
 // find the node with the given key
@@ -51,6 +53,8 @@ int treeHeight(node * root);
 // testing the functions with the first teacher pdf example
 void test_example_1();
 
+// testing
+void imprimir(node *root, int nivel);
 
 
 
@@ -64,18 +68,4 @@ void treeCalculateFatBal(node * root);
 void test_example_2();
 
 
-
-
-
-// **************** FUNCTIONS - FATBAL VECTOR **************** //
-// function that store the fatbal of the tree in a vector
-void storeFatBal(node * root, int * fatbalVector);
-
-
-
-
-
-// **************** FUNCTIONS - AUXILIARY **************** //
-void printExample1(node * root);
 #endif
-

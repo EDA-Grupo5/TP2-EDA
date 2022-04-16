@@ -121,7 +121,7 @@ node * readFile(char *fileName, node * root){
 }
 
 node *readCSV(char * filename, node * root){
-    FILE *file;
+    FILE *file = (FILE *)fopen(filename, "r");
     file = fopen(filename, "r");
     if(file == NULL){
         printf("The file %s does not exist.\n", filename);
@@ -144,6 +144,8 @@ node *readCSV(char * filename, node * root){
         }
         i = 0;
     }
+
+    free(file);
     fclose(file);
     return root;
 }
@@ -160,7 +162,8 @@ void createFile(char *fileName){
 }
 
 void test_example_3(){
-    node * root = NULL;
+    node * root = (node *)malloc(sizeof(node));
+    root = NULL;
     //createFile("test.txt");
     root = readCSV("test.txt", root);
     if (root == NULL)
@@ -171,10 +174,11 @@ void test_example_3(){
     else{
         printf(">>The root has been modified.\n");
         printf(">>Full tree:\n");
-        treePrint(root);
+        imprimir(root,1);
         printf(">>\n>>>Now the balance factor is being calculated\n");
         treeCalculateFatBal(root);
-        printExample1(root);
+        treePrintFatbal(root);
+        //printExample3(root);
         treeFree(root);
     }
 }
@@ -236,6 +240,29 @@ void treePrint(node * root)
     }
 }
 
+void treePrintFatbal(node * root)
+{
+    if (root != NULL){
+        
+        treePrintFatbal(root->left);
+        printf("Key: %d ", root->key);
+        printf("Fatbal: %d \n", root->fatbal);
+        treePrintFatbal(root->right);
+    }
+}
+
+void imprimir(node *root, int nivel){ 
+    int i; 
+    if(root){ 
+        imprimir(root->right, nivel + 1); 
+        printf("\n\n"); 
+        for(i = 0; i < nivel; i++) 
+            printf("\t"); 
+        printf("%d", root->key);  
+        imprimir(root->left, nivel + 1); 
+    } 
+}
+
 void treeFree(node * root){
     if (root != NULL){
         treeFree(root->left);
@@ -245,22 +272,17 @@ void treeFree(node * root){
 }
 
 void test_example_1(void){
+<<<<<<< HEAD
+    node *root =(node *) malloc(sizeof(node)*30);
+=======
     node *root =(node *) malloc(sizeof(node));
+    int nm[] = {40,54,1082,678,8674,8789,990,7642,9762,2345,34,897,182,9876};
+    int i;
+>>>>>>> b208ba1927d6acda41354e582546c73cb69581bc
     root = nodeCreate(40);
-    root = treeInsert(root, 54);
-    root = treeInsert(root, 1082);
-    root = treeInsert(root, 678);
-    root = treeInsert(root, 8674);
-    root = treeInsert(root, 87);
-    root = treeInsert(root, 89);
-    root = treeInsert(root, 990);
-    root = treeInsert(root, 7642);
-    root = treeInsert(root, 9762);
-    root = treeInsert(root, 2345);
-    root = treeInsert(root, 34);
-    root = treeInsert(root, 897);
-    root = treeInsert(root, 182);
-    root = treeInsert(root, 9876);
+    for(i = 1; i< 14; i++){
+        root = treeInsert(root, nm[i]);
+    }
     printf("\n>>>FULL TREE:\n");
     treePrint(root);
     printf("\n>>>SUB TREE WHEN THE KEY ARE 8674\n");
@@ -308,91 +330,10 @@ void treeCalculateFatBal(node * root){
     } 
 } 
 
-void test_example_2(void){
-    node *root = (node *) malloc(sizeof(node));
-    root = nodeCreate(40);
-    root = treeInsert(root, 54);
-    root = treeInsert(root, 1082);
-    root = treeInsert(root, 678);
-    root = treeInsert(root, 8674);
-    root = treeInsert(root, 87);
-    root = treeInsert(root, 89);
-    root = treeInsert(root, 990);
-    root = treeInsert(root, 7642);
-    root = treeInsert(root, 9762);
-    root = treeInsert(root, 2345);
-    root = treeInsert(root, 34);
-    root = treeInsert(root, 897);
-    root = treeInsert(root, 182);
-    root = treeInsert(root, 9876);
-    printf("\n>>>FULL TREE:\n");
-    treePrint(root);    
-    
-    printf("\n>>> BEFORE BALANCE\n");
-    printExample1(root);
-
-    printf("\n>>> AFTER BALANCE\n");
-    treeCalculateFatBal(root);
-
-    printExample1(root);
-
-    printf("\n>>>TEST FINISHED\n");
-
-    treeFree(root);
-}
 
 
 
 
 
 
-// functions about fatbal vector - 5
 
-void storeFatBal(node * root, int * fatbalVector){
-    if(root == NULL){
-        return;
-    }
-    else{
-        storeFatBal(root->left, fatbalVector);
-        fatbalVector[root->key] = root->fatbal;
-        storeFatBal(root->right, fatbalVector);
-    }
-}
-
-
-
-
-
-//auxiliary functions
-
-void printExample1(node * root){
-    printf("fatbal node 40: %d\n", treeFind(root, 40)->fatbal);
-    printf("fatbal node 54: %d\n", treeFind(root, 54)->fatbal);
-    printf("fatbal node 1082: %d\n", treeFind(root, 1082)->fatbal );
-    printf("fatbal node 678: %d\n", treeFind(root, 678)->fatbal);
-    printf("fatbal node 8674: %d\n", treeFind(root, 8674)->fatbal);
-    printf("fatbal node 87: %d\n", treeFind(root, 87)->fatbal);
-    printf("fatbal node 89: %d\n", treeFind(root, 89)->fatbal);
-    printf("fatbal node 990: %d\n", treeFind(root, 990)->fatbal);
-    printf("fatbal node 7642: %d\n", treeFind(root, 7642)->fatbal);
-    printf("fatbal node 9762: %d\n", treeFind(root, 9762)->fatbal);
-    printf("fatbal node 2345: %d\n", treeFind(root, 2345)->fatbal);
-    printf("fatbal node 34: %d\n", treeFind(root, 34)->fatbal);
-    printf("fatbal node 897: %d\n", treeFind(root, 897)->fatbal);
-    printf("fatbal node 182: %d\n", treeFind(root, 182)->fatbal);
-    printf("fatbal node 9876: %d\n", treeFind(root, 9876)->fatbal);
-}
-
-/* this function is more generics, but it is not used in this program
-void printExample1(node * root){
-    if(root == NULL){
-        return;
-    }
-    else{
-        printExample1(root->left);
-        //printf("fatbal node: %d\n", treeFind(root, root->key)->fatbal);
-        printf("%d ", root->fatbal);
-        printExample1(root->right);
-    }
-}
-*/
