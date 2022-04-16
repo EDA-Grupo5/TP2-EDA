@@ -175,10 +175,9 @@ void test_example_3(){
         printf(">>The root has been modified.\n");
         printf(">>Full tree:\n");
         imprimir(root,1);
-        printf(">>\n>>>Now the balance factor is being calculated\n");
+        printf("\n\n>>>Now the balance factor is being calculated\n");
         treeCalculateFatBal(root);
         treePrintFatbal(root);
-        //printExample3(root);
         treeFree(root);
     }
 }
@@ -271,33 +270,37 @@ void treeFree(node * root){
     }
 }
 
-void test_example_1(void){
-<<<<<<< HEAD
-    node *root =(node *) malloc(sizeof(node)*30);
-=======
-    node *root =(node *) malloc(sizeof(node));
-    int nm[] = {40,54,1082,678,8674,8789,990,7642,9762,2345,34,897,182,9876};
-    int i;
->>>>>>> b208ba1927d6acda41354e582546c73cb69581bc
+void test_example_1(){
+    node * root = (node *)malloc(sizeof(node));
     root = nodeCreate(40);
-    for(i = 1; i< 14; i++){
-        root = treeInsert(root, nm[i]);
-    }
-    printf("\n>>>FULL TREE:\n");
-    treePrint(root);
-    printf("\n>>>SUB TREE WHEN THE KEY ARE 8674\n");
+    root = treeInsert(root, 54);
+    root = treeInsert(root, 1082);
+    root = treeInsert(root, 678);
+    root = treeInsert(root, 8674);
+    root = treeInsert(root, 87);
+    root = treeInsert(root, 89);
+    root = treeInsert(root, 990);
+    root = treeInsert(root, 7642);
+    root = treeInsert(root, 9762);
+    root = treeInsert(root, 2345);
+    root = treeInsert(root, 34);
+    root = treeInsert(root, 897);
+    root = treeInsert(root, 182);
+    root = treeInsert(root, 9876);
+
+    printf(">>> FULL TREE:\n");
+    imprimir(root,1);
+
+    printf("\n>>> TREE WHEN THE ROOT IS 8674:\n");
     treePrint(treeFind(root, 8674));
-    printf("\n>>>SUB TREE WHEN THE KEY ARE 678\n");
+
+    printf("\n>>> TREE WHEN THE ROOT IS 678:\n");
     treePrint(treeFind(root, 678));
-    printf("\n>>>TEST FINISHED\n");
-    printf(">>>FULL TREE HIGH: %d\n", treeHeight(root));
-    printf(">>>8674 TREE HIGH: %d\n", treeHeight(treeFind(root, 8674)));
+
+    printf("\n>>> FINISH TEST\n");
+
     treeFree(root);
 }
-
-
-
-
 
 
 // functions about AVL tree - 4
@@ -330,6 +333,38 @@ void treeCalculateFatBal(node * root){
     } 
 } 
 
+void test_example_2(){
+    node * root = (node *)malloc(sizeof(node));
+    root = nodeCreate(40);
+    root = treeInsert(root, 54);
+    root = treeInsert(root, 1082);
+    root = treeInsert(root, 678);
+    root = treeInsert(root, 8674);
+    root = treeInsert(root, 87);
+    root = treeInsert(root, 89);
+    root = treeInsert(root, 990);
+    root = treeInsert(root, 7642);
+    root = treeInsert(root, 9762);
+    root = treeInsert(root, 2345);
+    root = treeInsert(root, 34);
+    root = treeInsert(root, 897);
+    root = treeInsert(root, 182);
+    root = treeInsert(root, 9876);
+
+    printf(">>> FULL TREE:\n");
+    imprimir(root,1);
+
+    printf("\n>>> FATBAL BEFORE CALCULATION:\n");
+    treePrintFatbal(root);
+
+    printf(">>> FATBAL AFTER CALCULATION:\n");
+    treeCalculateFatBal(root);
+    treePrintFatbal(root);
+
+    printf("\n>>> FINISH TEST\n");
+
+    treeFree(root);
+}
 
 
 
