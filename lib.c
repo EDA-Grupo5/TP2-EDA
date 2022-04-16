@@ -3,7 +3,7 @@
 #include <stdlib.h> 
 #include <string.h>
 
-// functions about menu
+// functions about menu - 1
 void test_menu(void){
     int again = 1;
     int option = 0;
@@ -71,7 +71,11 @@ void test_menu(void){
     }
 }
 
-// functions about file manipulation
+
+
+
+
+// functions about file manipulation - 2
 int fileExists(char *fileName){
     FILE *file;
     file = fopen(fileName, "r");
@@ -175,7 +179,12 @@ void test_example_3(){
     }
 }
 
-// functions about binary search tree
+
+
+
+
+
+// functions about binary search tree - 3
 node * nodeCreate(int key)
 {
     node * new_node = (node *) malloc(sizeof(node));
@@ -236,7 +245,7 @@ void treeFree(node * root){
 }
 
 void test_example_1(void){
-    node *root;
+    node *root =(node *) malloc(sizeof(node));
     int nm[] = {40,54,1082,678,8674,8789,990,7642,9762,2345,34,897,182,9876};
     int i;
     root = nodeCreate(40);
@@ -255,7 +264,12 @@ void test_example_1(void){
     treeFree(root);
 }
 
-// functions about AVL tree
+
+
+
+
+
+// functions about AVL tree - 4
 int treeHeight(node * root){
     if(root == NULL){
         return 0;
@@ -282,11 +296,11 @@ void treeCalculateFatBal(node * root){
         root->fatbal = left_height - right_height;
         treeCalculateFatBal(root->left);
         treeCalculateFatBal(root->right);
-    }
+    } 
 } 
 
 void test_example_2(void){
-    node *root;
+    node *root =(node *) malloc(sizeof(node));
     int nm[] = {40,54,1082,678,8674,8789,990,7642,9762,2345,34,897,182,9876};
     int i;
     root = nodeCreate(nm[0]);
@@ -295,19 +309,41 @@ void test_example_2(void){
     }
     printf("\n>>>FULL TREE:\n");
     treePrint(root);    
-
+    
     printf("\n>>> BEFORE BALANCE\n");
     printExample1(root);
 
     printf("\n>>> AFTER BALANCE\n");
-    treePrint(root);
     treeCalculateFatBal(root);
+
     printExample1(root);
 
     printf("\n>>>TEST FINISHED\n");
 
     treeFree(root);
 }
+
+
+
+
+
+
+// functions about fatbal vector - 5
+
+void storeFatBal(node * root, int * fatbalVector){
+    if(root == NULL){
+        return;
+    }
+    else{
+        storeFatBal(root->left, fatbalVector);
+        fatbalVector[root->key] = root->fatbal;
+        storeFatBal(root->right, fatbalVector);
+    }
+}
+
+
+
+
 
 //auxiliary functions
 
