@@ -162,8 +162,7 @@ void createFile(char *fileName){
 }
 
 void test_example_3(){
-    node * root = (node *)malloc(sizeof(node));
-    root = NULL;
+    node * root = NULL;
     //createFile("test.txt");
     root = readCSV("test.txt", root);
     if (root == NULL)
@@ -177,6 +176,9 @@ void test_example_3(){
         imprimir(root,1);
         printf("\n\n>>>Now the balance factor is being calculated\n");
         treeCalculateFatBal(root);
+
+        imprimir(root,1);
+        printf("\n");
         treePrintFatbal(root);
         treeFree(root);
     }
@@ -257,7 +259,8 @@ void imprimir(node *root, int nivel){
         printf("\n\n"); 
         for(i = 0; i < nivel; i++) 
             printf("\t"); 
-        printf("%d", root->key);  
+        printf("%d", root->key);
+        printf(" (%d)", root->fatbal);  
         imprimir(root->left, nivel + 1); 
     } 
 }
@@ -271,8 +274,8 @@ void treeFree(node * root){
 }
 
 void test_example_1(){
-    node * root = (node *)malloc(sizeof(node));
-    root = nodeCreate(40);
+    node * root = NULL;
+    root = treeInsert(root,40);
     root = treeInsert(root, 54);
     root = treeInsert(root, 1082);
     root = treeInsert(root, 678);
@@ -351,15 +354,19 @@ void test_example_2(){
     root = treeInsert(root, 182);
     root = treeInsert(root, 9876);
 
-    printf(">>> FULL TREE:\n");
-    imprimir(root,1);
-
     printf("\n>>> FATBAL BEFORE CALCULATION:\n");
     treePrintFatbal(root);
+    printf(">>> FULL TREE:\n");
+    imprimir(root,1);
+    printf("\n");
 
     printf(">>> FATBAL AFTER CALCULATION:\n");
     treeCalculateFatBal(root);
     treePrintFatbal(root);
+    printf("\n");
+
+    printf(">>> FULL TREE:\n");
+    imprimir(root,1);
 
     printf("\n>>> FINISH TEST\n");
 
