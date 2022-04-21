@@ -177,6 +177,7 @@ void test_example_3(){
         printf("\n\n>>>Now the balance factor is being calculated\n");
         treeCalculateFatBal(root);
 
+        printf(">>Full tree:\n");
         imprimir(root,1);
         printf("\n");
         treePrintFatbal(root);
@@ -192,7 +193,7 @@ void test_example_3(){
 // functions about binary search tree - 3
 node * nodeCreate(int key)
 {
-    node * new_node = (node *) malloc(sizeof(node));
+    node * new_node = (node *) calloc(3,sizeof(node));
     new_node->key = key;
     new_node->fatbal = 0;
     new_node->left = NULL;
@@ -275,22 +276,12 @@ void treeFree(node * root){
 
 void test_example_1(){
     node * root = NULL;
-    root = treeInsert(root,40);
-    root = treeInsert(root, 54);
-    root = treeInsert(root, 1082);
-    root = treeInsert(root, 678);
-    root = treeInsert(root, 8674);
-    root = treeInsert(root, 87);
-    root = treeInsert(root, 89);
-    root = treeInsert(root, 990);
-    root = treeInsert(root, 7642);
-    root = treeInsert(root, 9762);
-    root = treeInsert(root, 2345);
-    root = treeInsert(root, 34);
-    root = treeInsert(root, 897);
-    root = treeInsert(root, 182);
-    root = treeInsert(root, 9876);
+    int arrayRoot[15] = {40,54,1082,678,8674,87,89,990,7642,9762,2345,34,897,182,9876};
 
+    for(int i = 0; i < 15; i++){
+        root = treeInsert(root,arrayRoot[i]);
+    }
+    
     printf(">>> FULL TREE:\n");
     imprimir(root,1);
 
@@ -337,22 +328,12 @@ void treeCalculateFatBal(node * root){
 } 
 
 void test_example_2(){
-    node * root = (node *)malloc(sizeof(node));
-    root = nodeCreate(40);
-    root = treeInsert(root, 54);
-    root = treeInsert(root, 1082);
-    root = treeInsert(root, 678);
-    root = treeInsert(root, 8674);
-    root = treeInsert(root, 87);
-    root = treeInsert(root, 89);
-    root = treeInsert(root, 990);
-    root = treeInsert(root, 7642);
-    root = treeInsert(root, 9762);
-    root = treeInsert(root, 2345);
-    root = treeInsert(root, 34);
-    root = treeInsert(root, 897);
-    root = treeInsert(root, 182);
-    root = treeInsert(root, 9876);
+    node * root = NULL;
+    int arrayRoot[15] = {40,54,1082,678,8674,87,89,990,7642,9762,2345,34,897,182,9876};
+
+    for(int i = 0; i < 15; i++){
+        root = treeInsert(root,arrayRoot[i]);
+    }
 
     printf("\n>>> FATBAL BEFORE CALCULATION:\n");
     treePrintFatbal(root);
