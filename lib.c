@@ -164,7 +164,11 @@ void createFile(char *fileName){
 void test_example_3(){
     node * root = NULL;
     //createFile("test.txt");
-    root = readCSV("test.txt", root);
+    char nameArchive[100];// Variable for store name of archive
+    scanf("%c"); // Scanf to catch buffer \n
+    printf("Write name of archive: ");
+    scanf("%100[^\n]", nameArchive); // expression for read at maximium 100 characters
+    root = readCSV(nameArchive, root);
     if (root == NULL)
     {
         printf(">>Oops! The root has not been modified.\n");
