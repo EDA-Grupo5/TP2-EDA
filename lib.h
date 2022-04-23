@@ -30,13 +30,6 @@ node *readFile(char *fileName, node *root);
 node *readCSV(char *fileName, node *root);
 // create a new file with the name given as parameter
 void createFile(char *fileName);
-// function that test the functions about the file
-void test_example_3();
-
-// **************** FUNCTIONS - TEST MENU **************** //
-// the function returns the number of the test that the user wants to run
-
-void test_menu(void);
 
 // **************** FUNCTIONS - BINARY SEARCH TREE **************** //
 // create a new node to be inserted into the tree
@@ -55,18 +48,16 @@ void treeFree(node *root);
 node *balanceTree(node *root);
 // function that calculate the height of the tree
 int treeHeight(node *root);
-// testing the functions with the first teacher pdf example
-void test_example_1();
-
-// testing
-void printTree(node *root, int nivel);
-
-// **************** FUNCTIONS - AVL TREE **************** //
-// find the height of the tree
-int height(node *root);
+// function that printing the format of tree
+void printTree(node *root, int level);
 // function that calculates the balance factor and stores in fatbal
 void treeCalculateFatBal(node *root);
-// function that test the functions about the AVL tree
-void test_example_2();
 
+// **************** FUNCTIONS - TEST MENU **************** //
+// the function returns the number of the test that the user wants to run
+
+// void test_menu(void);
+// void test_example_1();
+// void test_example_2();
+// void test_example_3();
 #endif
