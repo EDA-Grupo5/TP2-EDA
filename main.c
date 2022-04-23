@@ -5,7 +5,8 @@
 
 int main (void)
 {
-    test_menu();
+    //test_menu();
+    test_menu1_official();
     system("pause");
     return 0;
 }

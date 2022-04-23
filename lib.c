@@ -7,11 +7,11 @@
 void test_menu(void){
     int again = 1;
     int option = 0;
-    printf("SELECT THE TEST YOU WANT TO RUN:\n");
+    printf("SELECT THE TEST YOU WANT TO RUN:\n");// Gera ABP e Imprime ABP
     printf("1. Test example 1 - FUNCTIONS ABOUT BINARY SEARCH TREE \n");
-    printf("2. Test example 2 - FUNCTIONS ABOUT AVL TREE\n");
-    printf("3. Test example 3 - FUNCTIONS ABOUT FILE\n");
-    printf("4. Exit - EXIT THE PROGRAM\n");
+    printf("2. Test example 2 - FUNCTIONS ABOUT AVL TREE\n"); // Calcula Fator de Balanceamento 
+    printf("3. Test example 3 - FUNCTIONS ABOUT FILE\n");// Gera ABP e Imprime ABP
+    printf("4. Exit - EXIT THE PROGRAM\n");// Sair
     scanf("%d", &option);
     if(option == 1){
         printf("\n>>>TEST EXAMPLE 1 IS RUNNING\n");
@@ -71,9 +71,60 @@ void test_menu(void){
     }
 }
 
+// Trying menu official
 
+void test_menu1_official(void){
+    int option = 0;
+    //int again = 1;
+    node * root = NULL;
 
+    do{
+        printf("SELECT THE TEST YOU WANT TO RUN:\n");
+         // Reads a CSV file and generates an ABP containing all the keys contained in it
+        printf("1. GENERATE BINARY SEACH TREE - (Gerar ABP) \n");
+        // Calculate and Stores the Balancing Factor of each node in its respective FatBal field
+        printf("2. CALCULATE BALACING FACTOR - (Calcular Fator de balanceamento)\n"); 
+        // Print the Key and FatBal of ABP nodes in ascending order
+        printf("3. PRINTING BINARY SEACH TREE - (Imprimir ABP)\n");
+        // Leave the program deallocating the nodes
+        printf("4. Exit - EXIT THE PROGRAM\n");
+        scanf("%d", &option);
+    
+        switch (option)
+        {
+        case 1:
+            printf("\nGenerating Binary Tree... \n ");
+            root = test_official_1(root); // Line 242
+            if(root == NULL){
+                printf("Empty Tree/Node");
+            }else{
+                printf("Binary Tree Generated!\n\n");
+            }
+            break;
+        case 2:
+            printf("\nCalculating Balacing Factor Binary Tree...\n ");
+            test_official_2(root); // Line 258
+            printf("Balacing Factor Binary Tree Calculated.\n\n");
+            break;
+        case 3:
+            printf("\nPrinting Binary Tree... \n");
+            test_official_3(root); // Line 262 
+            break;
+        case 4:
+            printf("\nExiting program...\n");
+            treeFree(root);
+            system("pause");
+            exit(0);
+            break;
 
+        default:
+            printf("\nError! Input not Valid.\n");
+            break;
+        }
+
+    }while( option != 4);
+
+}
 
 // functions about file manipulation - 2
 int fileExists(char *fileName){
@@ -189,9 +240,33 @@ void test_example_3(){
     }
 }
 
+node* test_official_1(node *root){
+    char nameArchive[100];// Variable for store name of archive
+    printf("Write name of archive: ");
+    scanf("%s", nameArchive); // expression for read at maximium 100 characters
+    root = readCSV(nameArchive, root);
+    if (root == NULL)
+    {
+        printf(">>Oops! The root has not been modified.\n");
+        printf(">>Please, review the function 'readFile' to fix this bug.\n");
+    }
+    else{
+        printf(">>The Binary Seaching Tree Has been Genareted.\n");
+        return root;
+    }
+}
 
+void test_official_2(node *root){
+    treeCalculateFatBal(root);
+}
 
-
+void test_official_3(node *root){
+    treePrintFatbal(root);
+    printf("\n");
+    printf(">>Full tree:\n");
+    imprimir(root,1);
+    printf("\n");
+}
 
 
 // functions about binary search tree - 3

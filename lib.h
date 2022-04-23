@@ -11,6 +11,8 @@ typedef struct BinarySearchTree{
 // the function returns the number of the test that the user wants to run
 void test_menu(void);
 
+void test_menu1_official(void);
+
 
 
 
@@ -29,7 +31,11 @@ node * readCSV(char *fileName, node * root);
 // function that test the functions about the file
 void test_example_3();
 
+// function menus official
 
+node* test_official_1(node *root);// Menu to generate binary tree at CSV
+void test_official_2(node *root);// Calculate FatBal
+void test_official_3(node *root);// Print binary tree
 
 
 
