@@ -56,7 +56,6 @@ void menu1_official(void)
                 root = NULL;
             }
             break;
-
         default:
             printf("\nError! Input not Valid.\n");
             break;
