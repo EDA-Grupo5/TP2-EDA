@@ -351,6 +351,11 @@ void treeFree(node * root){
         treeFree(root->right);
         free(root);
     }
+    if(root->key){
+        free(root->left);
+        free(root->right);
+        free(root);
+    }
 }
 
 void test_example_1(){
