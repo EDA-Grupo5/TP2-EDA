@@ -8,6 +8,7 @@
 void menu1_official(void)
 {
     int option = 0;
+    //int nFind;
     // int again = 1;
     node *root = NULL;
 
@@ -22,6 +23,8 @@ void menu1_official(void)
         printf("3. PRINTING BINARY SEACH TREE - (Imprimir ABP)\n");
         // Leave the program deallocating the nodes
         printf("4. EXIT THE PROGRAM - (Sair)\n");
+        // Find a root in the tree
+        //printf("5. LOOK FOR A ROOT IN A TREE.\n");
         scanf("%d", &option);
 
         switch (option)
@@ -56,7 +59,13 @@ void menu1_official(void)
                 root = NULL;
             }
             break;
-
+        /*
+        case 5:
+            printf("\n What number do you want to look for?\n");
+            scanf("%d", &nFind);
+            official_options_5(root,nFind);
+            break;
+        */
         default:
             printf("\nError! Input not Valid.\n");
             break;
@@ -96,6 +105,15 @@ void official_options_3(node *root)
     printTree(root, 1);
     printf("\n");
 }
+
+/*void official_options_5(node *root, int key){
+    if(treeFind(root, key)!=NULL){
+        treeNumberPrint(treeFind(root, key));
+    }else {
+        printf("Could not find the root.");
+    }
+    printf("\n");
+}*/
 
 // FUNCTIONS IN GENERAL
 

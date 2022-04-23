@@ -17,6 +17,7 @@ void menu1_official(void);
 node *official_options_1(node *root); // Menu to generate binary tree at CSV
 void official_options_2(node *root);  // Calculate FatBal
 void official_options_3(node *root);  // Print binary tree
+//void official_options_5(node *root, int key); // Find a root in a tree 
 
 // **************** FUNCTIONS - MANIPULATION OF FILE **************** //
 
