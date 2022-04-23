@@ -3,75 +3,7 @@
 #include <stdlib.h> 
 #include <string.h>
 
-// functions about menu - 1
-void test_menu(void){
-    int again = 1;
-    int option = 0;
-    printf("SELECT THE TEST YOU WANT TO RUN:\n");// Gera ABP e Imprime ABP
-    printf("1. Test example 1 - FUNCTIONS ABOUT BINARY SEARCH TREE \n");
-    printf("2. Test example 2 - FUNCTIONS ABOUT AVL TREE\n"); // Calcula Fator de Balanceamento 
-    printf("3. Test example 3 - FUNCTIONS ABOUT FILE\n");// Gera ABP e Imprime ABP
-    printf("4. Exit - EXIT THE PROGRAM\n");// Sair
-    scanf("%d", &option);
-    if(option == 1){
-        printf("\n>>>TEST EXAMPLE 1 IS RUNNING\n");
-        test_example_1();
-        printf("\n>>>TEST EXAMPLE 1 IS FINISHED\n");
-        printf("\n>>>DO YOU WANT TO RUN ANOTHER TEST?\n");
-        printf("1. YES\n");
-        printf("2. NO\n");
-        scanf("%d", &again);
-        if(again == 1){
-            test_menu();
-        }
-        else{
-            printf("\n>>>THANK YOU FOR USING THE PROGRAM\n");
-            exit(0);
-        }
-    }
-    else if(option == 2){
-        printf("\n>>>TEST EXAMPLE 2 IS RUNNING\n");
-        test_example_2();
-        printf("\n>>>TEST EXAMPLE 2 IS FINISHED\n");
-        printf("\n>>>DO YOU WANT TO RUN ANOTHER TEST?\n");
-        printf("1. YES\n");
-        printf("2. NO\n");
-        scanf("%d", &again);
-        if(again == 1){
-            test_menu();
-        }
-        else{
-            printf("\n>>>THANK YOU FOR USING THE PROGRAM\n");
-            exit(0);
-        }        
-    }
-    else if(option == 3){
-        printf("\n>>>TEST EXAMPLE 3 IS RUNNING\n");
-        test_example_3();
-        printf("\n>>>TEST EXAMPLE 3 IS FINISHED\n");
-        printf("\n>>>DO YOU WANT TO RUN ANOTHER TEST?\n");
-        printf("1. YES\n");
-        printf("2. NO\n");
-        scanf("%d", &again);
-        if(again == 1){
-            test_menu();
-        }
-        else{
-            printf("\n>>>THANK YOU FOR USING THE PROGRAM\n");
-            exit(0);
-        }
-    }
-    else if(option == 4){
-        printf("\n>>>EXITING THE PROGRAM\n");
-        exit(0);
-    }
-    else{
-        printf("\n>>>WRONG INPUT\n");
-        test_menu();
-    }
-}
-
-// Trying menu official
+// MENU AND YOURS FUNCTIONS
 
 void test_menu1_official(void){
     int option = 0;
@@ -113,7 +45,10 @@ void test_menu1_official(void){
         case 4:
             printf("\nExiting program...\n");
             treeFree(root);
-            system("pause");
+            printf("Teste");
+            if(root != NULL){
+                root = NULL;
+            }
             exit(0);
             break;
 
@@ -125,6 +60,37 @@ void test_menu1_official(void){
     }while( option != 4);
 
 }
+
+
+node* test_official_1(node *root){
+    char nameArchive[100];// Variable for store name of archive
+    printf("Write name of archive: ");
+    scanf("%s", nameArchive); // expression for read at maximium 100 characters
+    root = readCSV(nameArchive, root);
+    if (root == NULL)
+    {
+        printf(">>Oops! The root has not been modified.\n");
+        printf(">>Please, review the function 'readFile' to fix this bug.\n");
+    }
+    else{
+        printf(">>The Binary Seaching Tree Has been Genareted.\n");
+        return root;
+    }
+}
+
+void test_official_2(node *root){
+    treeCalculateFatBal(root);
+}
+
+void test_official_3(node *root){
+    treePrintFatbal(root);
+    printf("\n");
+    printf(">>Full tree:\n");
+    imprimir(root,1);
+    printf("\n");
+}
+
+// FUNCTIONS IN GENERAL
 
 // functions about file manipulation - 2
 int fileExists(char *fileName){
@@ -212,67 +178,10 @@ void createFile(char *fileName){
     printf("The file %s was created.\n", fileName);
 }
 
-void test_example_3(){
-    node * root = NULL;
-    //createFile("test.txt");
-    char nameArchive[100];// Variable for store name of archive
-    scanf("%c"); // Scanf to catch buffer \n
-    printf("Write name of archive: ");
-    scanf("%100[^\n]", nameArchive); // expression for read at maximium 100 characters
-    root = readCSV(nameArchive, root);
-    if (root == NULL)
-    {
-        printf(">>Oops! The root has not been modified.\n");
-        printf(">>Please, review the function 'readFile' to fix this bug.\n");
-    }
-    else{
-        printf(">>The root has been modified.\n");
-        printf(">>Full tree:\n");
-        imprimir(root,1);
-        printf("\n\n>>>Now the balance factor is being calculated\n");
-        treeCalculateFatBal(root);
-
-        printf(">>Full tree:\n");
-        imprimir(root,1);
-        printf("\n");
-        treePrintFatbal(root);
-        treeFree(root);
-    }
-}
-
-node* test_official_1(node *root){
-    char nameArchive[100];// Variable for store name of archive
-    printf("Write name of archive: ");
-    scanf("%s", nameArchive); // expression for read at maximium 100 characters
-    root = readCSV(nameArchive, root);
-    if (root == NULL)
-    {
-        printf(">>Oops! The root has not been modified.\n");
-        printf(">>Please, review the function 'readFile' to fix this bug.\n");
-    }
-    else{
-        printf(">>The Binary Seaching Tree Has been Genareted.\n");
-        return root;
-    }
-}
-
-void test_official_2(node *root){
-    treeCalculateFatBal(root);
-}
-
-void test_official_3(node *root){
-    treePrintFatbal(root);
-    printf("\n");
-    printf(">>Full tree:\n");
-    imprimir(root,1);
-    printf("\n");
-}
-
-
 // functions about binary search tree - 3
 node * nodeCreate(int key)
 {
-    node * new_node = (node *) calloc(3,sizeof(node));
+    node * new_node = (node *) calloc(4,sizeof(node));
     new_node->key = key;
     new_node->fatbal = 0;
     new_node->left = NULL;
@@ -332,16 +241,16 @@ void treePrintFatbal(node * root)
     }
 }
 
-void imprimir(node *root, int nivel){ 
+void imprimir(node *root, int level){ 
     int i; 
     if(root){ 
-        imprimir(root->right, nivel + 1); 
+        imprimir(root->right, level + 1); 
         printf("\n\n"); 
-        for(i = 0; i < nivel; i++) 
+        for(i = 0; i < level; i++) 
             printf("\t"); 
         printf("%d", root->key);
         printf(" (%d)", root->fatbal);  
-        imprimir(root->left, nivel + 1); 
+        imprimir(root->left, level + 1); 
     } 
 }
 
@@ -351,35 +260,8 @@ void treeFree(node * root){
         treeFree(root->right);
         free(root);
     }
-    if(root->key){
-        free(root->left);
-        free(root->right);
-        free(root);
-    }
-}
-
-void test_example_1(){
-    node * root = NULL;
-    int arrayRoot[15] = {40,54,1082,678,8674,87,89,990,7642,9762,2345,34,897,182,9876};
-
-    for(int i = 0; i < 15; i++){
-        root = treeInsert(root,arrayRoot[i]);
-    }
     
-    printf(">>> FULL TREE:\n");
-    imprimir(root,1);
-
-    printf("\n>>> TREE WHEN THE ROOT IS 8674:\n");
-    treePrint(treeFind(root, 8674));
-
-    printf("\n>>> TREE WHEN THE ROOT IS 678:\n");
-    treePrint(treeFind(root, 678));
-
-    printf("\n>>> FINISH TEST\n");
-
-    treeFree(root);
 }
-
 
 // functions about AVL tree - 4
 int treeHeight(node * root){
@@ -411,6 +293,98 @@ void treeCalculateFatBal(node * root){
     } 
 } 
 
+// FUNCTIONS TESTS
+
+// functions about menu - 1
+void test_menu(void){
+    int again = 1;
+    int option = 0;
+    printf("SELECT THE TEST YOU WANT TO RUN:\n");// Gera ABP e Imprime ABP
+    printf("1. Test example 1 - FUNCTIONS ABOUT BINARY SEARCH TREE \n");
+    printf("2. Test example 2 - FUNCTIONS ABOUT AVL TREE\n"); // Calcula Fator de Balanceamento 
+    printf("3. Test example 3 - FUNCTIONS ABOUT FILE\n");// Gera ABP e Imprime ABP
+    printf("4. Exit - EXIT THE PROGRAM\n");// Sair
+    scanf("%d", &option);
+    if(option == 1){
+        printf("\n>>>TEST EXAMPLE 1 IS RUNNING\n");
+        test_example_1();
+        printf("\n>>>TEST EXAMPLE 1 IS FINISHED\n");
+        printf("\n>>>DO YOU WANT TO RUN ANOTHER TEST?\n");
+        printf("1. YES\n");
+        printf("2. NO\n");
+        scanf("%d", &again);
+        if(again == 1){
+            test_menu();
+        }
+        else{
+            printf("\n>>>THANK YOU FOR USING THE PROGRAM\n");
+            exit(0);
+        }
+    }
+    else if(option == 2){
+        printf("\n>>>TEST EXAMPLE 2 IS RUNNING\n");
+        test_example_2();
+        printf("\n>>>TEST EXAMPLE 2 IS FINISHED\n");
+        printf("\n>>>DO YOU WANT TO RUN ANOTHER TEST?\n");
+        printf("1. YES\n");
+        printf("2. NO\n");
+        scanf("%d", &again);
+        if(again == 1){
+            test_menu();
+        }
+        else{
+            printf("\n>>>THANK YOU FOR USING THE PROGRAM\n");
+            exit(0);
+        }        
+    }
+    else if(option == 3){
+        printf("\n>>>TEST EXAMPLE 3 IS RUNNING\n");
+        test_example_3();
+        printf("\n>>>TEST EXAMPLE 3 IS FINISHED\n");
+        printf("\n>>>DO YOU WANT TO RUN ANOTHER TEST?\n");
+        printf("1. YES\n");
+        printf("2. NO\n");
+        scanf("%d", &again);
+        if(again == 1){
+            test_menu();
+        }
+        else{
+            printf("\n>>>THANK YOU FOR USING THE PROGRAM\n");
+            exit(0);
+        }
+    }
+    else if(option == 4){
+        printf("\n>>>EXITING THE PROGRAM\n");
+        exit(0);
+    }
+    else{
+        printf("\n>>>WRONG INPUT\n");
+        test_menu();
+    }
+}
+
+void test_example_1(){
+    node * root = NULL;
+    int arrayRoot[15] = {40,54,1082,678,8674,87,89,990,7642,9762,2345,34,897,182,9876};
+
+    for(int i = 0; i < 15; i++){
+        root = treeInsert(root,arrayRoot[i]);
+    }
+    
+    printf(">>> FULL TREE:\n");
+    imprimir(root,1);
+
+    printf("\n>>> TREE WHEN THE ROOT IS 8674:\n");
+    treePrint(treeFind(root, 8674));
+
+    printf("\n>>> TREE WHEN THE ROOT IS 678:\n");
+    treePrint(treeFind(root, 678));
+
+    printf("\n>>> FINISH TEST\n");
+
+    treeFree(root);
+}
+
 void test_example_2(){
     node * root = NULL;
     int arrayRoot[15] = {40,54,1082,678,8674,87,89,990,7642,9762,2345,34,897,182,9876};
@@ -438,9 +412,30 @@ void test_example_2(){
     treeFree(root);
 }
 
+void test_example_3(){
+    node * root = NULL;
+    //createFile("test.txt");
+    char nameArchive[100];// Variable for store name of archive
+    scanf("%c"); // Scanf to catch buffer \n
+    printf("Write name of archive: ");
+    scanf("%100[^\n]", nameArchive); // expression for read at maximium 100 characters
+    root = readCSV(nameArchive, root);
+    if (root == NULL)
+    {
+        printf(">>Oops! The root has not been modified.\n");
+        printf(">>Please, review the function 'readFile' to fix this bug.\n");
+    }
+    else{
+        printf(">>The root has been modified.\n");
+        printf(">>Full tree:\n");
+        imprimir(root,1);
+        printf("\n\n>>>Now the balance factor is being calculated\n");
+        treeCalculateFatBal(root);
 
-
-
-
-
-
+        printf(">>Full tree:\n");
+        imprimir(root,1);
+        printf("\n");
+        treePrintFatbal(root);
+        treeFree(root);
+    }
+}
