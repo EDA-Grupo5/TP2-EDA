@@ -1,77 +1,72 @@
 #ifndef _LIB_H
 #define _LIB_H
-typedef struct BinarySearchTree{
+typedef struct BinarySearchTree
+{
     int key;
     int fatbal;
     struct BinarySearchTree *left;
     struct BinarySearchTree *right;
-}node;
+} node;
 
-// **************** FUNCTIONS - TEST MENU **************** //
-// the function returns the number of the test that the user wants to run
-void test_menu(void);
+// **************** FUNCTIONS - OFFICIAL MENU **************** //
 
-void test_menu1_official(void);
+void menu1_official(void);
 
+// function menus official
 
-
-
+node *official_options_1(node *root); // Menu to generate binary tree at CSV
+void official_options_2(node *root);  // Calculate FatBal
+void official_options_3(node *root);  // Print binary tree
 
 // **************** FUNCTIONS - MANIPULATION OF FILE **************** //
-// create a new file with the name given as parameter
-void createFile(char *fileName);
+
 // Verifies if the file exists
 int fileExists(char *fileName);
 // Verifies if the file is empty
 int fileIsEmpty(char *fileName);
 // read the file and add the content to the tree
-node * readFile(char *fileName, node * root);
+node *readFile(char *fileName, node *root);
 // read the csv file and add the content to the binary search tree
-node * readCSV(char *fileName, node * root);
+node *readCSV(char *fileName, node *root);
+// create a new file with the name given as parameter
+void createFile(char *fileName);
 // function that test the functions about the file
 void test_example_3();
 
-// function menus official
+// **************** FUNCTIONS - TEST MENU **************** //
+// the function returns the number of the test that the user wants to run
 
-node* test_official_1(node *root);// Menu to generate binary tree at CSV
-void test_official_2(node *root);// Calculate FatBal
-void test_official_3(node *root);// Print binary tree
-
-
+void test_menu(void);
 
 // **************** FUNCTIONS - BINARY SEARCH TREE **************** //
 // create a new node to be inserted into the tree
-node * nodeCreate(int key);
+node *nodeCreate(int key);
 // insert a new node into the tree
-node * treeInsert(node * root, int key);
-// print the tree in order
-void treePrint(node * root);
-// print the fatbal of each node
-void treePrintFatbal(node * root);
-// free the memory of the node
-void treeFree(node * root);
+node *treeInsert(node *root, int key);
 // find the node with the given key
-node * treeFind(node * root, int key);
+node *treeFind(node *root, int key);
+// print the tree in order
+void treeNumberPrint(node *root);
+// print the fatbal of each node
+void treePrintFatbal(node *root);
+// free the memory of the node
+void treeFree(node *root);
 //  function that balances a binary search tree
-node * balanceTree(node * root);
+node *balanceTree(node *root);
 // function that calculate the height of the tree
-int treeHeight(node * root);
+int treeHeight(node *root);
 // testing the functions with the first teacher pdf example
 void test_example_1();
 
 // testing
-void imprimir(node *root, int nivel);
-
-
-
+void printTree(node *root, int nivel);
 
 // **************** FUNCTIONS - AVL TREE **************** //
 // find the height of the tree
-int height(node * root);
-// function that calculates the balance factor and stores in fatbal 
-void treeCalculateFatBal(node * root);
+int height(node *root);
+// function that calculates the balance factor and stores in fatbal
+void treeCalculateFatBal(node *root);
 // function that test the functions about the AVL tree
 void test_example_2();
-
 
 #endif
